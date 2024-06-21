@@ -12281,7 +12281,7 @@ function initialLoad() {
 }
 function _initialLoad() {
   _initialLoad = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    var response, jsonData, i, option, defaultOption;
+    var response, jsonData, i, option;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
@@ -12306,12 +12306,7 @@ function _initialLoad() {
             option.textContent = jsonData[i].name;
             breedSelect.appendChild(option);
           }
-          //adding default option
-          defaultOption = document.createElement("option");
-          defaultOption.setAttribute("selected", true);
-          defaultOption.textContent = "Pick a Cat Breed";
-          breedSelect.prepend(defaultOption);
-        case 11:
+        case 7:
         case "end":
           return _context.stop();
       }

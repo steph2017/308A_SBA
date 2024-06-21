@@ -37,11 +37,6 @@ async function initialLoad() {
     option.textContent = jsonData[i].name;
     breedSelect.appendChild(option);
   }
-  //adding default option
-  const defaultOption = document.createElement("option");
-  defaultOption.setAttribute("selected", true);
-  defaultOption.textContent = "Pick a Cat Breed";
-  breedSelect.prepend(defaultOption);
 }
 
 initialLoad();
