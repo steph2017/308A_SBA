@@ -57,14 +57,18 @@ initialLoad();
  */
 
 async function handleClick() {
-  // using a static url for now, later will figure out how to change breed id based on the click event 
-  const response = await fetch("https://api.thecatapi.com/v1/images/search?limit=20&breed_ids=bslo", {
+  // using a static url for now and a set limit of 20 to get multiple pics, later will figure out how to change breed id based on the click event 
+  const response = await fetch("https://api.thecatapi.com/v1/images/search?limit=20&breed_ids=" + breedSelect.value, {
     headers: {
       'x-api-key': API_KEY
     }
   });
-  const jsonData = await response.json //this will give me an array of objects with properties like img url, etc. for each cat pic.
+  const jsonData = await response.json(); //this will give me an array of objects with properties like img url, etc. for each cat pic.
 
+  //loop for new carousel
+  jsonData.forEach((x) => {
+
+  })
 }
 
 /**

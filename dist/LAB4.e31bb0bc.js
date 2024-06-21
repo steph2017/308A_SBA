@@ -12389,7 +12389,7 @@ function _handleClick() {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
           _context2.next = 2;
-          return fetch("https://api.thecatapi.com/v1/images/search?limit=20&breed_ids=bslo", {
+          return fetch("https://api.thecatapi.com/v1/images/search?limit=20&breed_ids=" + breedSelect.value, {
             headers: {
               'x-api-key': API_KEY
             }
@@ -12397,10 +12397,14 @@ function _handleClick() {
         case 2:
           response = _context2.sent;
           _context2.next = 5;
-          return response.json;
+          return response.json();
         case 5:
           jsonData = _context2.sent;
-        case 6:
+          //this will give me an array of objects with properties like img url, etc. for each cat pic.
+
+          //loop for new carousel
+          jsonData.forEach(function (x) {});
+        case 7:
         case "end":
           return _context2.stop();
       }
