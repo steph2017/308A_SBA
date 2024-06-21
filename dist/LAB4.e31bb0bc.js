@@ -12315,6 +12315,8 @@ function _initialLoad() {
   return _initialLoad.apply(this, arguments);
 }
 initialLoad();
+//event listener on the submit button!
+getFavouritesBtn.addEventListener("click", handleClick);
 
 /**
  * 2. Create an event handler for breedSelect that does the following:
@@ -12384,7 +12386,7 @@ function handleClick() {
  */
 function _handleClick() {
   _handleClick = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-    var response2, jsonData2, infoTable, infoArray, _i, _infoArray, item, row, col1, col2, response, jsonData;
+    var response2, jsonData2, infoArray, _i, _infoArray, item, row, col1, col2, response, jsonData;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
@@ -12401,21 +12403,20 @@ function _handleClick() {
         case 5:
           jsonData2 = _context2.sent;
           //this gives me a single breed object with the info i will turn over to infodump.
-          infoTable = document.createElement("table");
           infoArray = Object.entries(jsonData2);
           _i = 0, _infoArray = infoArray;
-        case 9:
+        case 8:
           if (!(_i < _infoArray.length)) {
-            _context2.next = 24;
+            _context2.next = 23;
             break;
           }
           item = _infoArray[_i];
-          if (!(item[0] === "reference_image_id" || item[0] === "country_codes")) {
-            _context2.next = 13;
+          if (!(item[0] === "reference_image_id" || item[0] === "country_codes" || item[0] === "id" || item[0] === "weight")) {
+            _context2.next = 12;
             break;
           }
-          return _context2.abrupt("continue", 21);
-        case 13:
+          return _context2.abrupt("continue", 20);
+        case 12:
           row = document.createElement("tr");
           col1 = document.createElement("td");
           col2 = document.createElement("td");
@@ -12423,23 +12424,23 @@ function _handleClick() {
           col2.textContent = item[1];
           row.appendChild(col1);
           row.appendChild(col2);
-          infoTable.appendChild(row);
-        case 21:
+          infoDump.appendChild(row);
+        case 20:
           _i++;
-          _context2.next = 9;
+          _context2.next = 8;
           break;
-        case 24:
-          _context2.next = 26;
+        case 23:
+          _context2.next = 25;
           return fetch("https://api.thecatapi.com/v1/images/search?limit=20&breed_ids=" + breedSelect.value, {
             headers: {
               'x-api-key': API_KEY
             }
           });
-        case 26:
+        case 25:
           response = _context2.sent;
-          _context2.next = 29;
+          _context2.next = 28;
           return response.json();
-        case 29:
+        case 28:
           jsonData = _context2.sent;
           //this will give me an array of objects with properties like img url, etc. for each cat pic.
 
@@ -12455,7 +12456,7 @@ function _handleClick() {
             Carousel.appendCarousel(Carousel.createCarouselItem(imgsrc, imgalt, imgid));
           });
           Carousel.start();
-        case 33:
+        case 32:
         case "end":
           return _context2.stop();
       }

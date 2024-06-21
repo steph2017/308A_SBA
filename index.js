@@ -40,6 +40,8 @@ async function initialLoad() {
 }
 
 initialLoad();
+//event listener on the submit button!
+getFavouritesBtn.addEventListener("click", handleClick);
 
 /**
  * 2. Create an event handler for breedSelect that does the following:
@@ -64,11 +66,10 @@ async function handleClick() {
     }
   });
   const jsonData2 = await response2.json(); //this gives me a single breed object with the info i will turn over to infodump.
-  const infoTable = document.createElement("table");
   const infoArray = Object.entries(jsonData2);
 
   for (const item of infoArray) {
-    if (item[0] === "reference_image_id" || item[0] === "country_codes") { //skips undesired fields 
+    if (item[0] === "reference_image_id" || item[0] === "country_codes" || item[0] === "id" || item[0] === "weight") { //skips undesired fields 
       continue
     }
     const row = document.createElement("tr");
@@ -80,8 +81,9 @@ async function handleClick() {
 
     row.appendChild(col1);
     row.appendChild(col2);
-    infoTable.appendChild(row);
+    infoDump.appendChild(row);
   }
+
 
   // infoDump.textContent =
   //   "Temprament: " + jsonData2.temprament + "\n" +
