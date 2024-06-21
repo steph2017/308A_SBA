@@ -67,7 +67,7 @@ async function handleClick() {
   const infoTable = document.createElement("table");
   const infoArray = Object.entries(jsonData2);
 
-  infoArray.forEach((item) => {
+  for (const item of infoArray) {
     if (item[0] === "reference_image_id" || item[0] === "country_codes") { //skips undesired fields 
       continue
     }
@@ -81,7 +81,7 @@ async function handleClick() {
     row.appendChild(col1);
     row.appendChild(col2);
     infoTable.appendChild(row);
-  })
+  }
 
   // infoDump.textContent =
   //   "Temprament: " + jsonData2.temprament + "\n" +
