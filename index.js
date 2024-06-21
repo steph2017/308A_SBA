@@ -11,7 +11,7 @@ const progressBar = document.getElementById("progressBar");
 const getFavouritesBtn = document.getElementById("getFavouritesBtn");
 
 // Step 0: Store your API key here for reference and easy access.
-const API_KEY = "";
+const API_KEY = "live_2E1Euws0XnCHf3juXXWaHTzaNaZaxjLTvTV2leoKBORf03fiHDvI8ZV7QFijt7j8";
 
 /**
  * 1. Create an async function "initialLoad" that does the following:
@@ -21,6 +21,30 @@ const API_KEY = "";
  *  - Each option should display text equal to the name of the breed.
  * This function should execute immediately.
  */
+
+async function initialLoad() {
+  const response = await fetch("https://api.thecatapi.com/v1/breeds", {
+    headers: {
+      'x-api-key': API_KEY
+    }
+  });
+  const jsonData = await response.json(); // i think it returns an array of objects which have the desired properties .id and .name (data is read-only so i cant check my work with console.log)
+
+  //attempt to add the breed names to the drop down
+  for (let i = 0; i < jsonData.length; i++) {
+    const option = document.createElement("option");
+    option.setAttribute("value", jsonData[i].id);
+    option.textContent = jsonData[i].name;
+    breedSelect.appendChild(option);
+  }
+  //adding default option
+  const defaultOption = document.createElement("option");
+  defaultOption.setAttribute("selected", true);
+  defaultOption.textContent = "Pick a Cat Breed";
+  breedSelect.prepend(defaultOption);
+}
+
+initialLoad();
 
 /**
  * 2. Create an event handler for breedSelect that does the following:
