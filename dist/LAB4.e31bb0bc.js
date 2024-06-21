@@ -12384,21 +12384,50 @@ function handleClick() {
  */
 function _handleClick() {
   _handleClick = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-    var response, jsonData;
+    var response2, jsonData2, infoTable, infoArray, response, jsonData;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
           _context2.next = 2;
-          return fetch("https://api.thecatapi.com/v1/images/search?limit=20&breed_ids=" + breedSelect.value, {
+          return fetch("https://api.thecatapi.com/v1/breeds/" + breedSelect.value, {
             headers: {
               'x-api-key': API_KEY
             }
           });
         case 2:
-          response = _context2.sent;
+          response2 = _context2.sent;
           _context2.next = 5;
-          return response.json();
+          return response2.json();
         case 5:
+          jsonData2 = _context2.sent;
+          //this gives me a single breed object with the info i will turn over to infodump.
+          infoTable = document.createElement("table");
+          infoArray = Object.entries(jsonData2);
+          infoArray.forEach(function (item) {
+            var row = document.createElement("tr");
+            var col1 = document.createElement("td");
+            var col2 = document.createElement("td");
+            col1.textContent = item[0];
+            col2.textContent = item[1];
+            row.appendChild(col1);
+          });
+
+          // infoDump.textContent =
+          //   "Temprament: " + jsonData2.temprament + "\n" +
+          //   "Origin: " + jsonData2.origin + "\n" +
+          //   "Life Span: " + jsonData2.life_span + "\n" +
+          // using a static url for now and a set limit of 20 to get multiple pics, later will figure out how to change breed id based on the click event 
+          _context2.next = 11;
+          return fetch("https://api.thecatapi.com/v1/images/search?limit=20&breed_ids=" + breedSelect.value, {
+            headers: {
+              'x-api-key': API_KEY
+            }
+          });
+        case 11:
+          response = _context2.sent;
+          _context2.next = 14;
+          return response.json();
+        case 14:
           jsonData = _context2.sent;
           //this will give me an array of objects with properties like img url, etc. for each cat pic.
 
@@ -12414,7 +12443,7 @@ function _handleClick() {
             Carousel.appendCarousel(Carousel.createCarouselItem(imgsrc, imgalt, imgid));
           });
           Carousel.start();
-        case 9:
+        case 18:
         case "end":
           return _context2.stop();
       }

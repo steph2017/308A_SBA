@@ -57,6 +57,36 @@ initialLoad();
  */
 
 async function handleClick() {
+  //info dump
+  const response2 = await fetch("https://api.thecatapi.com/v1/breeds/" + breedSelect.value, {
+    headers: {
+      'x-api-key': API_KEY
+    }
+  });
+  const jsonData2 = await response2.json(); //this gives me a single breed object with the info i will turn over to infodump.
+  const infoTable = document.createElement("table");
+  const infoArray = Object.entries(jsonData2);
+
+  infoArray.forEach((item) => {
+    if (item[0] === "reference_image_id" || item[0] === "country_codes") { //skips undesired fields 
+      continue
+    }
+    const row = document.createElement("tr");
+    const col1 = document.createElement("td");
+    const col2 = document.createElement("td");
+
+    col1.textContent = item[0];
+    col2.textContent = item[1];
+
+    row.appendChild(col1);
+    row.appendChild(col2);
+    infoTable.appendChild(row);
+  })
+
+  // infoDump.textContent =
+  //   "Temprament: " + jsonData2.temprament + "\n" +
+  //   "Origin: " + jsonData2.origin + "\n" +
+  //   "Life Span: " + jsonData2.life_span + "\n" +
   // using a static url for now and a set limit of 20 to get multiple pics, later will figure out how to change breed id based on the click event 
   const response = await fetch("https://api.thecatapi.com/v1/images/search?limit=20&breed_ids=" + breedSelect.value, {
     headers: {
