@@ -12334,8 +12334,18 @@ function _handleClick() {
           //this will give me an array of objects with properties like img url, etc. for each cat pic.
 
           //loop for new carousel
-          jsonData.forEach(function (x) {});
-        case 7:
+          Carousel.clear();
+          jsonData.forEach(function (x) {
+            //extract needed variables
+            var imgsrc = x.url;
+            var imgalt = "cute cat image";
+            var imgid = x.id;
+
+            //feed variables into external functions
+            Carousel.appendCarousel(Carousel.createCarouselItem(imgsrc, imgalt, imgid));
+          });
+          Carousel.start();
+        case 9:
         case "end":
           return _context2.stop();
       }

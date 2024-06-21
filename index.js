@@ -66,9 +66,17 @@ async function handleClick() {
   const jsonData = await response.json(); //this will give me an array of objects with properties like img url, etc. for each cat pic.
 
   //loop for new carousel
+  Carousel.clear();
   jsonData.forEach((x) => {
+    //extract needed variables
+    const imgsrc = x.url;
+    const imgalt = "cute cat image";
+    const imgid = x.id;
 
-  })
+    //feed variables into external functions
+    Carousel.appendCarousel(Carousel.createCarouselItem(imgsrc, imgalt, imgid));
+  });
+  Carousel.start();
 }
 
 /**
