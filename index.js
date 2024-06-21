@@ -67,7 +67,7 @@ async function handleClick() {
   });
   const jsonData2 = await response2.json(); //this gives me a single breed object with the info i will turn over to infodump.
   const infoArray = Object.entries(jsonData2);
-
+  infoDump.innerHTML = "";
   for (const item of infoArray) {
     if (item[0] === "reference_image_id" || item[0] === "country_codes" || item[0] === "id" || item[0] === "weight") { //skips undesired fields 
       continue

@@ -12404,19 +12404,20 @@ function _handleClick() {
           jsonData2 = _context2.sent;
           //this gives me a single breed object with the info i will turn over to infodump.
           infoArray = Object.entries(jsonData2);
+          infoDump.innerHTML = "";
           _i = 0, _infoArray = infoArray;
-        case 8:
+        case 9:
           if (!(_i < _infoArray.length)) {
-            _context2.next = 23;
+            _context2.next = 24;
             break;
           }
           item = _infoArray[_i];
           if (!(item[0] === "reference_image_id" || item[0] === "country_codes" || item[0] === "id" || item[0] === "weight")) {
-            _context2.next = 12;
+            _context2.next = 13;
             break;
           }
-          return _context2.abrupt("continue", 20);
-        case 12:
+          return _context2.abrupt("continue", 21);
+        case 13:
           row = document.createElement("tr");
           col1 = document.createElement("td");
           col2 = document.createElement("td");
@@ -12425,22 +12426,22 @@ function _handleClick() {
           row.appendChild(col1);
           row.appendChild(col2);
           infoDump.appendChild(row);
-        case 20:
+        case 21:
           _i++;
-          _context2.next = 8;
+          _context2.next = 9;
           break;
-        case 23:
-          _context2.next = 25;
+        case 24:
+          _context2.next = 26;
           return fetch("https://api.thecatapi.com/v1/images/search?limit=20&breed_ids=" + breedSelect.value, {
             headers: {
               'x-api-key': API_KEY
             }
           });
-        case 25:
+        case 26:
           response = _context2.sent;
-          _context2.next = 28;
+          _context2.next = 29;
           return response.json();
-        case 28:
+        case 29:
           jsonData = _context2.sent;
           //this will give me an array of objects with properties like img url, etc. for each cat pic.
 
@@ -12456,7 +12457,7 @@ function _handleClick() {
             Carousel.appendCarousel(Carousel.createCarouselItem(imgsrc, imgalt, imgid));
           });
           Carousel.start();
-        case 32:
+        case 33:
         case "end":
           return _context2.stop();
       }
