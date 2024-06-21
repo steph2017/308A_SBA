@@ -12261,7 +12261,9 @@ initialLoad();
  * - Each new selection should clear, re-populate, and restart the Carousel.
  * - Add a call to this function to the end of your initialLoad function above to create the initial carousel.
  */
-
+function handleClick() {
+  return _handleClick.apply(this, arguments);
+}
 /**
  * 3. Fork your own sandbox, creating a new one named "JavaScript Axios Lab."
  */
@@ -12280,7 +12282,6 @@ initialLoad();
  * - Add a console.log statement to indicate when requests begin.
  * - As an added challenge, try to do this on your own without referencing the lesson material.
  */
-
 /**
  * 6. Next, we'll create a progress bar to indicate the request is in progress.
  * - The progressBar element has already been created for you.
@@ -12296,7 +12297,6 @@ initialLoad();
  *   once or twice per request to this API. This is still a concept worth familiarizing yourself
  *   with for future projects.
  */
-
 /**
  * 7. As a final element of progress indication, add the following to your axios interceptors:
  * - In your request interceptor, set the body element's cursor style to "progress."
@@ -12313,6 +12313,32 @@ initialLoad();
  *   you delete that favourite using the API, giving this function "toggle" functionality.
  * - You can call this function by clicking on the heart at the top right of any image.
  */
+function _handleClick() {
+  _handleClick = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    var response, jsonData;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return fetch("https://api.thecatapi.com/v1/images/search?limit=20&breed_ids=bslo", {
+            headers: {
+              'x-api-key': API_KEY
+            }
+          });
+        case 2:
+          response = _context2.sent;
+          _context2.next = 5;
+          return response.json;
+        case 5:
+          jsonData = _context2.sent;
+        case 6:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2);
+  }));
+  return _handleClick.apply(this, arguments);
+}
 function favourite(_x) {
   return _favourite.apply(this, arguments);
 }
@@ -12333,14 +12359,14 @@ function favourite(_x) {
  *   your code should account for this.
  */
 function _favourite() {
-  _favourite = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(imgId) {
-    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-      while (1) switch (_context2.prev = _context2.next) {
+  _favourite = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(imgId) {
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
         case 0:
         case "end":
-          return _context2.stop();
+          return _context3.stop();
       }
-    }, _callee2);
+    }, _callee3);
   }));
   return _favourite.apply(this, arguments);
 }

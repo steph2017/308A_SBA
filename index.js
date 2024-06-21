@@ -56,6 +56,17 @@ initialLoad();
  * - Add a call to this function to the end of your initialLoad function above to create the initial carousel.
  */
 
+async function handleClick() {
+  // using a static url for now, later will figure out how to change breed id based on the click event 
+  const response = await fetch("https://api.thecatapi.com/v1/images/search?limit=20&breed_ids=bslo", {
+    headers: {
+      'x-api-key': API_KEY
+    }
+  });
+  const jsonData = await response.json //this will give me an array of objects with properties like img url, etc. for each cat pic.
+
+}
+
 /**
  * 3. Fork your own sandbox, creating a new one named "JavaScript Axios Lab."
  */
