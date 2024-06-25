@@ -3,11 +3,13 @@ This project is a webpage powered by Javascript that consumes the [Met API](http
 
 ## Table of Contents
 - [Installation](#installation)
+- [Live Site](#livesite)
 - [Usage](#usage)
 - [Features](#features)
 - [Acknowledgements](#acknowledgements)
   
-
+## Live Site
+[https://main--tubular-ganache-6c2c23.netlify.app/](https://main--tubular-ganache-6c2c23.netlify.app/)
 
 ## Installation
 
@@ -19,8 +21,7 @@ git clone https://github.com/steph2017/SBA316.git
 cd your-repo-name
 
 ##### Deploy via Parcel
-npm install
-npm start
+npm run build
 
 
 ## Features
@@ -42,5 +43,5 @@ npm start
 This was made possible by:
 - Instruction from [Tishana](https://github.com/tishana) and [Manara](https://github.com/Manara-Ali) under the [Per Scholas Software Engineering Immersive]https://perscholas.org/courses/software-engineer/
 - The Per Scholas Product Development Team for the [borrowed code](https://codesandbox.io/p/sandbox/ajax-fetch-and-axios-lab-template-8yn8xq?from-embed=).
-- [Nadir Kerem](https://github.com/nadirkerem) for his advice on installing the shell code via "npm install" and "npm start".
+- [Nadir Kerem](https://github.com/nadirkerem) for his advice on installing the shell code via "npm run build" and for showing me how to deploy through Netlify to avoid config issues.
 - Helpful troubleshooting resources such as [MDN Web Docs](https://developer.mozilla.org/en-US/) and [Stack Overflow](https://stackoverflow.com/).
