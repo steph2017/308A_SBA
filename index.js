@@ -23,25 +23,23 @@ const API_KEY = "live_2E1Euws0XnCHf3juXXWaHTzaNaZaxjLTvTV2leoKBORf03fiHDvI8ZV7QF
  */
 
 async function initialLoad() {
-  const response = await fetch("https://api.thecatapi.com/v1/breeds", {
-    headers: {
-      'x-api-key': API_KEY
-    }
-  });
-  const jsonData = await response.json(); // i think it returns an array of objects which have the desired properties .id and .name (data is read-only so i cant check my work with console.log)
+  const response = await fetch("https://collectionapi.metmuseum.org/public/collection/v1/departments");
+  const jsonData = await response.json(); // returns an object with a single key value pair - the value is an array of objects which have the desired properties .departmentId and .displayName 
+  const departments = jsonData.departments;
 
-  //attempt to add the breed names to the drop down
-  for (let i = 0; i < jsonData.length; i++) {
+  //adding the department names to the drop down
+  for (let i = 0; i < departments.length; i++) {
+    console.log(i);
     const option = document.createElement("option");
-    option.setAttribute("value", jsonData[i].id);
-    option.textContent = jsonData[i].name;
+    option.setAttribute("value", departments[i].departmentId);
+    option.textContent = departments[i].displayName;
     breedSelect.appendChild(option);
   }
 }
 
 initialLoad();
 //event listener on the submit button!
-getFavouritesBtn.addEventListener("click", handleClick);
+// getFavouritesBtn.addEventListener("click", handleClick);
 
 /**
  * 2. Create an event handler for breedSelect that does the following:
@@ -58,58 +56,52 @@ getFavouritesBtn.addEventListener("click", handleClick);
  * - Add a call to this function to the end of your initialLoad function above to create the initial carousel.
  */
 
-async function handleClick() {
-  //info dump
-  const response2 = await fetch("https://api.thecatapi.com/v1/breeds/" + breedSelect.value, {
-    headers: {
-      'x-api-key': API_KEY
-    }
-  });
-  const jsonData2 = await response2.json(); //this gives me a single breed object with the info i will turn over to infodump.
-  const infoArray = Object.entries(jsonData2);
-  infoDump.innerHTML = "";
-  for (const item of infoArray) {
-    if (item[0] === "reference_image_id" || item[0] === "country_codes" || item[0] === "id" || item[0] === "weight") { //skips undesired fields 
-      continue
-    }
-    const row = document.createElement("tr");
-    const col1 = document.createElement("td");
-    const col2 = document.createElement("td");
+// async function handleClick() {
+//   //info dump
+//   const response2 = await fetch("https://api.thecatapi.com/v1/breeds/" + breedSelect.value, {
+//     headers: {
+//       'x-api-key': API_KEY
+//     }
+//   });
+//   const jsonData2 = await response2.json(); //this gives me a single breed object with the info i will turn over to infodump.
+//   const infoArray = Object.entries(jsonData2);
+//   infoDump.innerHTML = "";
+//   for (const item of infoArray) {
+//     if (item[0] === "reference_image_id" || item[0] === "country_codes" || item[0] === "id" || item[0] === "weight") { //skips undesired fields
+//       continue
+//     }
+//     const row = document.createElement("tr");
+//     const col1 = document.createElement("td");
+//     const col2 = document.createElement("td");
 
-    col1.textContent = item[0];
-    col2.textContent = item[1];
+//     col1.textContent = item[0];
+//     col2.textContent = item[1];
 
-    row.appendChild(col1);
-    row.appendChild(col2);
-    infoDump.appendChild(row);
-  }
+//     row.appendChild(col1);
+//     row.appendChild(col2);
+//     infoDump.appendChild(row);
+//   }
 
+//   const response = await fetch("https://api.thecatapi.com/v1/images/search?limit=20&breed_ids=" + breedSelect.value, {
+//     headers: {
+//       'x-api-key': API_KEY
+//     }
+//   });
+//   const jsonData = await response.json(); //this will give me an array of objects with properties like img url, etc. for each cat pic.
 
-  // infoDump.textContent =
-  //   "Temprament: " + jsonData2.temprament + "\n" +
-  //   "Origin: " + jsonData2.origin + "\n" +
-  //   "Life Span: " + jsonData2.life_span + "\n" +
-  // using a static url for now and a set limit of 20 to get multiple pics, later will figure out how to change breed id based on the click event 
-  const response = await fetch("https://api.thecatapi.com/v1/images/search?limit=20&breed_ids=" + breedSelect.value, {
-    headers: {
-      'x-api-key': API_KEY
-    }
-  });
-  const jsonData = await response.json(); //this will give me an array of objects with properties like img url, etc. for each cat pic.
+//   //loop for new carousel
+//   Carousel.clear();
+//   jsonData.forEach((x) => {
+//     //extract needed variables
+//     const imgsrc = x.url;
+//     const imgalt = "cute cat image";
+//     const imgid = x.id;
 
-  //loop for new carousel
-  Carousel.clear();
-  jsonData.forEach((x) => {
-    //extract needed variables
-    const imgsrc = x.url;
-    const imgalt = "cute cat image";
-    const imgid = x.id;
-
-    //feed variables into external functions
-    Carousel.appendCarousel(Carousel.createCarouselItem(imgsrc, imgalt, imgid));
-  });
-  Carousel.start();
-}
+//     //feed variables into external functions
+//     Carousel.appendCarousel(Carousel.createCarouselItem(imgsrc, imgalt, imgid));
+//   });
+//   Carousel.start();
+// }
 
 /**
  * 3. Fork your own sandbox, creating a new one named "JavaScript Axios Lab."
@@ -161,10 +153,10 @@ async function handleClick() {
  * - Add additional logic to this function such that if the image is already favourited,
  *   you delete that favourite using the API, giving this function "toggle" functionality.
  * - You can call this function by clicking on the heart at the top right of any image.
- */
-export async function favourite(imgId) {
-  // your code here
-}
+//  */
+// export async function favourite(imgId) {
+//   // your code here
+// }
 
 /**
  * 9. Test your favourite() function by creating a getFavourites() function.

@@ -12174,10 +12174,6 @@ exports.Axios = Axios;
 },{"./lib/axios.js":"node_modules/axios/lib/axios.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.favourite = favourite;
 var Carousel = _interopRequireWildcard(require("./Carousel.js"));
 var _axios = _interopRequireDefault(require("axios"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
@@ -12212,32 +12208,28 @@ function initialLoad() {
 }
 function _initialLoad() {
   _initialLoad = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    var response, jsonData, i, option;
+    var response, jsonData, departments, i, option;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return fetch("https://api.thecatapi.com/v1/breeds", {
-            headers: {
-              'x-api-key': API_KEY
-            }
-          });
+          return fetch("https://collectionapi.metmuseum.org/public/collection/v1/departments");
         case 2:
           response = _context.sent;
           _context.next = 5;
           return response.json();
         case 5:
           jsonData = _context.sent;
-          // i think it returns an array of objects which have the desired properties .id and .name (data is read-only so i cant check my work with console.log)
-
-          //attempt to add the breed names to the drop down
-          for (i = 0; i < jsonData.length; i++) {
+          // returns an object with a single key value pair - the value is an array of objects which have the desired properties .departmentId and .displayName 
+          departments = jsonData.departments; //adding the department names to the drop down
+          for (i = 0; i < departments.length; i++) {
+            console.log(i);
             option = document.createElement("option");
-            option.setAttribute("value", jsonData[i].id);
-            option.textContent = jsonData[i].name;
+            option.setAttribute("value", departments[i].departmentId);
+            option.textContent = departments[i].displayName;
             breedSelect.appendChild(option);
           }
-        case 7:
+        case 8:
         case "end":
           return _context.stop();
       }
@@ -12247,7 +12239,7 @@ function _initialLoad() {
 }
 initialLoad();
 //event listener on the submit button!
-getFavouritesBtn.addEventListener("click", handleClick);
+// getFavouritesBtn.addEventListener("click", handleClick);
 
 /**
  * 2. Create an event handler for breedSelect that does the following:
@@ -12263,9 +12255,54 @@ getFavouritesBtn.addEventListener("click", handleClick);
  * - Each new selection should clear, re-populate, and restart the Carousel.
  * - Add a call to this function to the end of your initialLoad function above to create the initial carousel.
  */
-function handleClick() {
-  return _handleClick.apply(this, arguments);
-}
+
+// async function handleClick() {
+//   //info dump
+//   const response2 = await fetch("https://api.thecatapi.com/v1/breeds/" + breedSelect.value, {
+//     headers: {
+//       'x-api-key': API_KEY
+//     }
+//   });
+//   const jsonData2 = await response2.json(); //this gives me a single breed object with the info i will turn over to infodump.
+//   const infoArray = Object.entries(jsonData2);
+//   infoDump.innerHTML = "";
+//   for (const item of infoArray) {
+//     if (item[0] === "reference_image_id" || item[0] === "country_codes" || item[0] === "id" || item[0] === "weight") { //skips undesired fields
+//       continue
+//     }
+//     const row = document.createElement("tr");
+//     const col1 = document.createElement("td");
+//     const col2 = document.createElement("td");
+
+//     col1.textContent = item[0];
+//     col2.textContent = item[1];
+
+//     row.appendChild(col1);
+//     row.appendChild(col2);
+//     infoDump.appendChild(row);
+//   }
+
+//   const response = await fetch("https://api.thecatapi.com/v1/images/search?limit=20&breed_ids=" + breedSelect.value, {
+//     headers: {
+//       'x-api-key': API_KEY
+//     }
+//   });
+//   const jsonData = await response.json(); //this will give me an array of objects with properties like img url, etc. for each cat pic.
+
+//   //loop for new carousel
+//   Carousel.clear();
+//   jsonData.forEach((x) => {
+//     //extract needed variables
+//     const imgsrc = x.url;
+//     const imgalt = "cute cat image";
+//     const imgid = x.id;
+
+//     //feed variables into external functions
+//     Carousel.appendCarousel(Carousel.createCarouselItem(imgsrc, imgalt, imgid));
+//   });
+//   Carousel.start();
+// }
+
 /**
  * 3. Fork your own sandbox, creating a new one named "JavaScript Axios Lab."
  */
@@ -12284,6 +12321,7 @@ function handleClick() {
  * - Add a console.log statement to indicate when requests begin.
  * - As an added challenge, try to do this on your own without referencing the lesson material.
  */
+
 /**
  * 6. Next, we'll create a progress bar to indicate the request is in progress.
  * - The progressBar element has already been created for you.
@@ -12299,6 +12337,7 @@ function handleClick() {
  *   once or twice per request to this API. This is still a concept worth familiarizing yourself
  *   with for future projects.
  */
+
 /**
  * 7. As a final element of progress indication, add the following to your axios interceptors:
  * - In your request interceptor, set the body element's cursor style to "progress."
@@ -12314,91 +12353,11 @@ function handleClick() {
  * - Add additional logic to this function such that if the image is already favourited,
  *   you delete that favourite using the API, giving this function "toggle" functionality.
  * - You can call this function by clicking on the heart at the top right of any image.
- */
-function _handleClick() {
-  _handleClick = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-    var response2, jsonData2, infoArray, _i, _infoArray, item, row, col1, col2, response, jsonData;
-    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-      while (1) switch (_context2.prev = _context2.next) {
-        case 0:
-          _context2.next = 2;
-          return fetch("https://api.thecatapi.com/v1/breeds/" + breedSelect.value, {
-            headers: {
-              'x-api-key': API_KEY
-            }
-          });
-        case 2:
-          response2 = _context2.sent;
-          _context2.next = 5;
-          return response2.json();
-        case 5:
-          jsonData2 = _context2.sent;
-          //this gives me a single breed object with the info i will turn over to infodump.
-          infoArray = Object.entries(jsonData2);
-          infoDump.innerHTML = "";
-          _i = 0, _infoArray = infoArray;
-        case 9:
-          if (!(_i < _infoArray.length)) {
-            _context2.next = 24;
-            break;
-          }
-          item = _infoArray[_i];
-          if (!(item[0] === "reference_image_id" || item[0] === "country_codes" || item[0] === "id" || item[0] === "weight")) {
-            _context2.next = 13;
-            break;
-          }
-          return _context2.abrupt("continue", 21);
-        case 13:
-          row = document.createElement("tr");
-          col1 = document.createElement("td");
-          col2 = document.createElement("td");
-          col1.textContent = item[0];
-          col2.textContent = item[1];
-          row.appendChild(col1);
-          row.appendChild(col2);
-          infoDump.appendChild(row);
-        case 21:
-          _i++;
-          _context2.next = 9;
-          break;
-        case 24:
-          _context2.next = 26;
-          return fetch("https://api.thecatapi.com/v1/images/search?limit=20&breed_ids=" + breedSelect.value, {
-            headers: {
-              'x-api-key': API_KEY
-            }
-          });
-        case 26:
-          response = _context2.sent;
-          _context2.next = 29;
-          return response.json();
-        case 29:
-          jsonData = _context2.sent;
-          //this will give me an array of objects with properties like img url, etc. for each cat pic.
+//  */
+// export async function favourite(imgId) {
+//   // your code here
+// }
 
-          //loop for new carousel
-          Carousel.clear();
-          jsonData.forEach(function (x) {
-            //extract needed variables
-            var imgsrc = x.url;
-            var imgalt = "cute cat image";
-            var imgid = x.id;
-
-            //feed variables into external functions
-            Carousel.appendCarousel(Carousel.createCarouselItem(imgsrc, imgalt, imgid));
-          });
-          Carousel.start();
-        case 33:
-        case "end":
-          return _context2.stop();
-      }
-    }, _callee2);
-  }));
-  return _handleClick.apply(this, arguments);
-}
-function favourite(_x) {
-  return _favourite.apply(this, arguments);
-}
 /**
  * 9. Test your favourite() function by creating a getFavourites() function.
  * - Use Axios to get all of your favourites from the cat API.
@@ -12408,6 +12367,7 @@ function favourite(_x) {
  *    If that isn't in its own function, maybe it should be so you don't have to
  *    repeat yourself in this section.
  */
+
 /**
  * 10. Test your site, thoroughly!
  * - What happens when you try to load the Malayan breed?
@@ -12415,18 +12375,6 @@ function favourite(_x) {
  * - Test other breeds as well. Not every breed has the same data available, so
  *   your code should account for this.
  */
-function _favourite() {
-  _favourite = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(imgId) {
-    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-      while (1) switch (_context3.prev = _context3.next) {
-        case 0:
-        case "end":
-          return _context3.stop();
-      }
-    }, _callee3);
-  }));
-  return _favourite.apply(this, arguments);
-}
 },{"./Carousel.js":"Carousel.js","axios":"node_modules/axios/index.js"}],"Carousel.js":[function(require,module,exports) {
 "use strict";
 
@@ -12521,7 +12469,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52369" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49330" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
