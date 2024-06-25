@@ -16,17 +16,16 @@ export async function picArrange(deptId) {
             i--;
             continue;
         }
-        picInfo = "Title: " + getPhoto.title + "\n" +
-            "Medium: " + getPhoto.medium + "\n"
-        "Artist: " + getPhoto.artistDisplayName + ", " + getPhoto.artistDisplayBio + "\n" +
-            "Date: " + getPhoto.objectDate + "\n";
+        picInfo = "Title: \"" + getPhoto.title + "\"\n" +
+            "Medium: " + getPhoto.medium + "\n" +
+            "Artist: " + getPhoto.artistDisplayName + "\n" +
+            "Date: (" + getPhoto.objectDate + ") \n";
         picArray[i] = {
             id: picID,
             url: getPhoto.primaryImage,
             alt: "image of \"" + getPhoto.title + "\"",
             info: picInfo
         };
-        console.log(picArray);
     }
     return picArray;
 }

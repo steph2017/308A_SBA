@@ -153,7 +153,7 @@ function _picArrange() {
           i = 0;
         case 11:
           if (!(i < 15)) {
-            _context.next = 29;
+            _context.next = 27;
             break;
           }
           picID = idList[Math.round(Math.random() * (idList.length - 1))];
@@ -170,24 +170,22 @@ function _picArrange() {
             break;
           }
           i--;
-          return _context.abrupt("continue", 26);
+          return _context.abrupt("continue", 24);
         case 22:
-          picInfo = "Title: " + getPhoto.title + "\n" + "Medium: " + getPhoto.medium + "\n";
-          "Artist: " + getPhoto.artistDisplayName + ", " + getPhoto.artistDisplayBio + "\n" + "Date: " + getPhoto.objectDate + "\n";
+          picInfo = "Title: \"" + getPhoto.title + "\"\n" + "Medium: " + getPhoto.medium + "\n" + "Artist: " + getPhoto.artistDisplayName + "\n" + "Date: (" + getPhoto.objectDate + ") \n";
           picArray[i] = {
             id: picID,
             url: getPhoto.primaryImage,
             alt: "image of \"" + getPhoto.title + "\"",
             info: picInfo
           };
-          console.log(picArray);
-        case 26:
+        case 24:
           i++;
           _context.next = 11;
           break;
-        case 29:
+        case 27:
           return _context.abrupt("return", picArray);
-        case 30:
+        case 28:
         case "end":
           return _context.stop();
       }

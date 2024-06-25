@@ -24,18 +24,18 @@
 <script src="/styles.8986bff4.js"></script></head>
 
 <body>
-  <!-- Progress Bar-->
-  <div id="progressBar" class="progress-bar-top" style="transition: width 1s ease;"></div>
 
-  <!-- Breed Selection -->
+
+  <!-- Department Selection -->
   <h2 class="w-100 text-center mt-5">Select an Art department!</h2>
   <select id="breedSelect" style="width: 300px;" class="form-select form-select-lg my-1 mx-auto" aria-label="form-select-lg">
   </select>
-  <div class="d-flex">
+  <div id="BtnCntr" class="d-flex">
     <button id="getFavouritesBtn" class="btn btn-success mx-auto mb-5">
       Get Art
     </button>
   </div>
+  <div id="subheader" class="text-center mt-2">Click Me Again To Refresh the Art!</div>
 
   <!-- Carousel -->
   <div id="carouselExampleControls" class="carousel" data-bs-ride="carousel">
@@ -60,10 +60,6 @@
         <div class="img-wrapper">
           <img src="https://via.placeholder.com/600/92c952" class="d-block w-100" alt="...">
           <div data-img-id="" class="favourite-button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
-              <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-              <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"></path>
-            </svg>
           </div>
         </div>
       </div>

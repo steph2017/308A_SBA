@@ -11,16 +11,12 @@ const progressBar = document.getElementById("progressBar");
 // The get favourites button element.
 const getFavouritesBtn = document.getElementById("getFavouritesBtn");
 
-// Step 0: Store your API key here for reference and easy access.
-const API_KEY = "";
+
+
+
 
 /**
- * 1. Create an async function "initialLoad" that does the following:
- * - Retrieve a list of breeds from the cat API using fetch().
- * - Create new <options> for each of these breeds, and append them to breedSelect.
- *  - Each option should have a value attribute equal to the id of the breed.
- *  - Each option should display text equal to the name of the breed.
- * This function should execute immediately.
+ * 1. Created an async function "initialLoad" that retrieve a list of department ids from the NY Met API using fetch(). then creates the dropdown options.
  */
 
 async function initialLoad() {
@@ -53,7 +49,7 @@ getFavouritesBtn.addEventListener("click", handleClick);
 async function handleClick() {
   // use external pic Arrange function to get the array we will use
   let myArray = await picArrange(breedSelect.value);
-  console.log(typeof myArray);
+
 
   //loop for new carousel
   Carousel.clear();
@@ -67,7 +63,22 @@ async function handleClick() {
     Carousel.appendCarousel(Carousel.createCarouselItem(imgsrc, imgalt, imgid));
   });
   Carousel.start();
+
+  //infodump
+  infoDump.innerHTML = "";
+  let header = document.createElement("h3");
+  header.textContent = "More Information about your Art Gallery";
+  infoDump.appendChild(header);
+  myArray.forEach((pic) => {
+    let myP = document.createElement("p");
+    let myBr = document.createElement("br");
+    myP.textContent = "Image #" + (myArray.indexOf(pic) + 1) + ": " + pic.info + "\n";
+    infoDump.appendChild(myP);
+    infoDump.appendChild(myBr);
+  });
 }
+
+
 
 /**
  * 3. Fork your own sandbox, creating a new one named "JavaScript Axios Lab."

@@ -12276,7 +12276,7 @@ function _picArrange() {
           i = 0;
         case 11:
           if (!(i < 15)) {
-            _context.next = 29;
+            _context.next = 27;
             break;
           }
           picID = idList[Math.round(Math.random() * (idList.length - 1))];
@@ -12293,24 +12293,22 @@ function _picArrange() {
             break;
           }
           i--;
-          return _context.abrupt("continue", 26);
+          return _context.abrupt("continue", 24);
         case 22:
-          picInfo = "Title: " + getPhoto.title + "\n" + "Medium: " + getPhoto.medium + "\n";
-          "Artist: " + getPhoto.artistDisplayName + ", " + getPhoto.artistDisplayBio + "\n" + "Date: " + getPhoto.objectDate + "\n";
+          picInfo = "Title: \"" + getPhoto.title + "\"\n" + "Medium: " + getPhoto.medium + "\n" + "Artist: " + getPhoto.artistDisplayName + "\n" + "Date: (" + getPhoto.objectDate + ") \n";
           picArray[i] = {
             id: picID,
             url: getPhoto.primaryImage,
             alt: "image of \"" + getPhoto.title + "\"",
             info: picInfo
           };
-          console.log(picArray);
-        case 26:
+        case 24:
           i++;
           _context.next = 11;
           break;
-        case 29:
+        case 27:
           return _context.abrupt("return", picArray);
-        case 30:
+        case 28:
         case "end":
           return _context.stop();
       }
@@ -12340,16 +12338,8 @@ var progressBar = document.getElementById("progressBar");
 // The get favourites button element.
 var getFavouritesBtn = document.getElementById("getFavouritesBtn");
 
-// Step 0: Store your API key here for reference and easy access.
-var API_KEY = "";
-
 /**
- * 1. Create an async function "initialLoad" that does the following:
- * - Retrieve a list of breeds from the cat API using fetch().
- * - Create new <options> for each of these breeds, and append them to breedSelect.
- *  - Each option should have a value attribute equal to the id of the breed.
- *  - Each option should display text equal to the name of the breed.
- * This function should execute immediately.
+ * 1. Created an async function "initialLoad" that retrieve a list of department ids from the NY Met API using fetch(). then creates the dropdown options.
  */
 function initialLoad() {
   return _initialLoad.apply(this, arguments);
@@ -12469,7 +12459,7 @@ function handleClick() {
  */
 function _handleClick() {
   _handleClick = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-    var myArray;
+    var myArray, header;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
@@ -12477,8 +12467,6 @@ function _handleClick() {
           return (0, _picArrange.picArrange)(breedSelect.value);
         case 2:
           myArray = _context2.sent;
-          console.log(_typeof(myArray));
-
           //loop for new carousel
           Carousel.clear();
           myArray.forEach(function (pic) {
@@ -12491,7 +12479,20 @@ function _handleClick() {
             Carousel.appendCarousel(Carousel.createCarouselItem(imgsrc, imgalt, imgid));
           });
           Carousel.start();
-        case 7:
+
+          //infodump
+          infoDump.innerHTML = "";
+          header = document.createElement("h3");
+          header.textContent = "More Information about your Art Gallery";
+          infoDump.appendChild(header);
+          myArray.forEach(function (pic) {
+            var myP = document.createElement("p");
+            var myBr = document.createElement("br");
+            myP.textContent = "Image #" + (myArray.indexOf(pic) + 1) + ": " + pic.info + "\n";
+            infoDump.appendChild(myP);
+            infoDump.appendChild(myBr);
+          });
+        case 11:
         case "end":
           return _context2.stop();
       }
