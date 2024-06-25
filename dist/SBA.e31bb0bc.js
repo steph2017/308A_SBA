@@ -12262,7 +12262,7 @@ var progressBar = document.getElementById("progressBar");
 var getFavouritesBtn = document.getElementById("getFavouritesBtn");
 
 // Step 0: Store your API key here for reference and easy access.
-var API_KEY = "live_2E1Euws0XnCHf3juXXWaHTzaNaZaxjLTvTV2leoKBORf03fiHDvI8ZV7QFijt7j8";
+var API_KEY = "";
 
 /**
  * 1. Create an async function "initialLoad" that does the following:
@@ -12327,11 +12327,7 @@ initialLoad();
 
 // async function handleClick() {
 //   //info dump
-//   const response2 = await fetch("https://api.thecatapi.com/v1/breeds/" + breedSelect.value, {
-//     headers: {
-//       'x-api-key': API_KEY
-//     }
-//   });
+//   const response2 = await fetch("https://api.thecatapi.com/v1/breeds/" + breedSelect.value);
 //   const jsonData2 = await response2.json(); //this gives me a single breed object with the info i will turn over to infodump.
 //   const infoArray = Object.entries(jsonData2);
 //   infoDump.innerHTML = "";
@@ -12351,11 +12347,7 @@ initialLoad();
 //     infoDump.appendChild(row);
 //   }
 
-//   const response = await fetch("https://api.thecatapi.com/v1/images/search?limit=20&breed_ids=" + breedSelect.value, {
-//     headers: {
-//       'x-api-key': API_KEY
-//     }
-//   });
+//   const response = await fetch("https://api.thecatapi.com/v1/images/search?limit=20&breed_ids=" + breedSelect.value);
 //   const jsonData = await response.json(); //this will give me an array of objects with properties like img url, etc. for each cat pic.
 
 //   //loop for new carousel
