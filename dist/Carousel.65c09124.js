@@ -12317,63 +12317,20 @@ function _initialLoad() {
   return _initialLoad.apply(this, arguments);
 }
 initialLoad();
-//event listener on the submit button!
-// getFavouritesBtn.addEventListener("click", handleClick);
+// event listener on the submit button!
+getFavouritesBtn.addEventListener("click", handleClick);
 
 /**
- * 2. Create an event handler for breedSelect that does the following:
- * - Retrieve information on the selected breed from the cat API using fetch().
- *  - Make sure your request is receiving multiple array items!
- *  - Check the API documentation if you're only getting a single object.
+ * 2. Create an event handler for the dropdown that does the following:
+ * - Retrieve information on the selected art department from the Met Museum API using fetch().
+ *  -
  * - For each object in the response array, create a new element for the carousel.
  *  - Append each of these new elements to the carousel.
- * - Use the other data you have been given to create an informational section within the infoDump element.
- *  - Be creative with how you create DOM elements and HTML.
- *  - Feel free to edit index.html and styles.css to suit your needs, but be careful!
- *  - Remember that functionality comes first, but user experience and design are important.
- * - Each new selection should clear, re-populate, and restart the Carousel.
- * - Add a call to this function to the end of your initialLoad function above to create the initial carousel.
+ * - Use the other data you have been given to create an informational picture caption 
  */
-
-// async function handleClick() {
-//   //info dump
-//   const response2 = await fetch("https://api.thecatapi.com/v1/breeds/" + breedSelect.value);
-//   const jsonData2 = await response2.json(); //this gives me a single breed object with the info i will turn over to infodump.
-//   const infoArray = Object.entries(jsonData2);
-//   infoDump.innerHTML = "";
-//   for (const item of infoArray) {
-//     if (item[0] === "reference_image_id" || item[0] === "country_codes" || item[0] === "id" || item[0] === "weight") { //skips undesired fields
-//       continue
-//     }
-//     const row = document.createElement("tr");
-//     const col1 = document.createElement("td");
-//     const col2 = document.createElement("td");
-
-//     col1.textContent = item[0];
-//     col2.textContent = item[1];
-
-//     row.appendChild(col1);
-//     row.appendChild(col2);
-//     infoDump.appendChild(row);
-//   }
-
-//   const response = await fetch("https://api.thecatapi.com/v1/images/search?limit=20&breed_ids=" + breedSelect.value);
-//   const jsonData = await response.json(); //this will give me an array of objects with properties like img url, etc. for each cat pic.
-
-//   //loop for new carousel
-//   Carousel.clear();
-//   jsonData.forEach((x) => {
-//     //extract needed variables
-//     const imgsrc = x.url;
-//     const imgalt = "cute cat image";
-//     const imgid = x.id;
-
-//     //feed variables into external functions
-//     Carousel.appendCarousel(Carousel.createCarouselItem(imgsrc, imgalt, imgid));
-//   });
-//   Carousel.start();
-// }
-
+function handleClick() {
+  return _handleClick.apply(this, arguments);
+}
 /**
  * 3. Fork your own sandbox, creating a new one named "JavaScript Axios Lab."
  */
@@ -12392,7 +12349,6 @@ initialLoad();
  * - Add a console.log statement to indicate when requests begin.
  * - As an added challenge, try to do this on your own without referencing the lesson material.
  */
-
 /**
  * 6. Next, we'll create a progress bar to indicate the request is in progress.
  * - The progressBar element has already been created for you.
@@ -12408,7 +12364,6 @@ initialLoad();
  *   once or twice per request to this API. This is still a concept worth familiarizing yourself
  *   with for future projects.
  */
-
 /**
  * 7. As a final element of progress indication, add the following to your axios interceptors:
  * - In your request interceptor, set the body element's cursor style to "progress."
@@ -12428,7 +12383,6 @@ initialLoad();
 // export async function favourite(imgId) {
 //   // your code here
 // }
-
 /**
  * 9. Test your favourite() function by creating a getFavourites() function.
  * - Use Axios to get all of your favourites from the cat API.
@@ -12438,7 +12392,6 @@ initialLoad();
  *    If that isn't in its own function, maybe it should be so you don't have to
  *    repeat yourself in this section.
  */
-
 /**
  * 10. Test your site, thoroughly!
  * - What happens when you try to load the Malayan breed?
@@ -12446,6 +12399,33 @@ initialLoad();
  * - Test other breeds as well. Not every breed has the same data available, so
  *   your code should account for this.
  */
+function _handleClick() {
+  _handleClick = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    var myArray;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          // use external pic Arrange function to get the array we will use
+          myArray = (0, _picArrange.picArrange)(breedSelect.value); //loop for new carousel
+          Carousel.clear();
+          myArray.forEach(function (pic) {
+            //extract needed variables
+            var imgsrc = pic.url;
+            var imgalt = pic.alt;
+            var imgid = pic.id;
+
+            //feed variables into external functions
+            Carousel.appendCarousel(Carousel.createCarouselItem(imgsrc, imgalt, imgid));
+          });
+          Carousel.start();
+        case 4:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2);
+  }));
+  return _handleClick.apply(this, arguments);
+}
 },{"./Carousel.js":"Carousel.js","axios":"node_modules/axios/index.js","./picArrange.js":"picArrange.js"}],"Carousel.js":[function(require,module,exports) {
 "use strict";
 
