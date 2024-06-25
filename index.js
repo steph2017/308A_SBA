@@ -30,7 +30,6 @@ async function initialLoad() {
 
   //adding the department names to the drop down
   for (let i = 0; i < departments.length; i++) {
-    console.log(i);
     const option = document.createElement("option");
     option.setAttribute("value", departments[i].departmentId);
     option.textContent = departments[i].displayName;
@@ -53,7 +52,8 @@ getFavouritesBtn.addEventListener("click", handleClick);
 
 async function handleClick() {
   // use external pic Arrange function to get the array we will use
-  let myArray = picArrange(breedSelect.value);
+  let myArray = await picArrange(breedSelect.value);
+  console.log(typeof myArray);
 
   //loop for new carousel
   Carousel.clear();

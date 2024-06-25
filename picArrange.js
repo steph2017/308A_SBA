@@ -3,7 +3,7 @@ export async function picArrange(deptId) {
     const response = await fetch("https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=" + deptId);
     const jsonData = await response.json(); // returns an object with a 2 key value pairs - we want the array of values corresponding to "objectIDs"
     const idList = jsonData.objectIDs;
-    const picID = 0;
+    let picID = 0;
     const picArray = [];
     let picInfo = "";
 
@@ -18,7 +18,7 @@ export async function picArrange(deptId) {
         }
         picInfo = "Title: " + getPhoto.title + "\n" +
             "Medium: " + getPhoto.medium + "\n"
-        "Artist: " + getPhoto.artistDisplayName + ", " + artistDisplayBio + "\n" +
+        "Artist: " + getPhoto.artistDisplayName + ", " + getPhoto.artistDisplayBio + "\n" +
             "Date: " + getPhoto.objectDate + "\n";
         picArray[i] = {
             id: picID,
@@ -26,6 +26,7 @@ export async function picArrange(deptId) {
             alt: "image of \"" + getPhoto.title + "\"",
             info: picInfo
         };
+        console.log(picArray);
     }
     return picArray;
 }
