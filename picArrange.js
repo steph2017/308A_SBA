@@ -27,5 +27,5 @@ export async function picArrange(deptId) {
             info: picInfo
         };
     }
-    return
+    return picArray;
 }

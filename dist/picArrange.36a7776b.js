@@ -186,7 +186,7 @@ function _picArrange() {
           _context.next = 11;
           break;
         case 28:
-          return _context.abrupt("return");
+          return _context.abrupt("return", picArray);
         case 29:
         case "end":
           return _context.stop();
